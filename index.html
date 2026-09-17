@@ -1,284 +1,681 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkinGlow - Men's Skincare AI</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RE-CONE — Smartphone Comparison Platform</title>
+  <meta name="description" content="Compare smartphones side-by-side across performance, camera, battery, display and more. Verified benchmarks, honest specs, and intelligent comparison summaries.">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">
-                <i class="fas fa-face-smile"></i>
-                <span>SkinGlow</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#analysis">AI Analysis</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#routines">Routines</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Smart Skincare for Men</h1>
-                <p>Get personalized skincare recommendations powered by AI. Analyze your skin, discover what you need, and achieve your best look.</p>
-                <a href="#analysis" class="cta-btn">Start AI Analysis <i class="fas fa-arrow-right"></i></a>
-            </div>
-            <div class="hero-image">
-                <div class="face-graphic">
-                    <i class="fas fa-face-smile-beam"></i>
-                </div>
-            </div>
-        </section>
+  <!-- ==================== INTERACTIVE BACKGROUND & TACTILE NOISE ==================== -->
+  <div class="bg-architectural-grid" aria-hidden="true"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
 
-        <section id="analysis" class="analysis-section">
-            <div class="section-header">
-                <h2>AI Face Analysis</h2>
-                <p>Upload a photo or use your camera to get instant skin analysis</p>
-            </div>
+  <!-- ==================== HEADER & TOP NAVIGATION ==================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand-logo">
+        <span class="brand-title">RE-CONE</span>
+        <span class="brand-tag">COMPARE · 2025-26</span>
+      </a>
 
-            <div class="analysis-container">
-                <div class="upload-area" id="uploadArea">
-                    <div class="upload-content" id="uploadContent">
-                        <i class="fas fa-cloud-arrow-up"></i>
-                        <p>Drag & drop your photo here</p>
-                        <span>or</span>
-                        <button class="upload-btn" id="uploadBtn">Choose File</button>
-                        <input type="file" id="fileInput" accept="image/*" hidden>
-                    </div>
-                    <div class="preview-area" id="previewArea" style="display:none;">
-                        <img id="previewImage" src="" alt="Preview">
-                        <button class="retake-btn" id="retakeBtn"><i class="fas fa-redo"></i> Retake</button>
-                    </div>
-                </div>
+      <nav class="main-nav" aria-label="Primary Navigation">
+        <a href="#categories" class="nav-link">Categories</a>
+        <a href="#spec-matrix-explorer" class="nav-link">Spec Matrix</a>
+        <a href="#recommendation-engine" class="nav-link">Daily Driver Match</a>
+        <a href="#manifesto" class="nav-link">Manifesto</a>
+      </nav>
 
-                <div class="camera-area" id="cameraArea" style="display:none;">
-                    <video id="video" autoplay playsinline></video>
-                    <div class="camera-controls">
-                        <button class="capture-btn" id="captureBtn"><i class="fas fa-camera"></i></button>
-                        <button class="close-camera-btn" id="closeCameraBtn"><i class="fas fa-times"></i></button>
-                    </div>
-                    <canvas id="canvas" style="display:none;"></canvas>
-                </div>
+      <div class="header-actions">
+        <button class="compare-pill-btn" id="header-compare-btn" title="View device comparison matrix">
+          <span>Compare</span>
+          <span class="compare-badge compare-count-badge">0</span>
+        </button>
+        <a href="#recommendation-engine" class="btn btn-primary btn-sm">Find Match</a>
+        <button class="mobile-menu-toggle btn-icon" aria-label="Toggle navigation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
 
-                <div class="action-buttons">
-                    <button class="camera-btn" id="cameraBtn"><i class="fas fa-camera"></i> Use Camera</button>
-                    <button class="analyze-btn" id="analyzeBtn" disabled><i class="fas fa-wand-magic-sparkles"></i> Analyze Now</button>
-                </div>
-            </div>
+    <!-- Mobile Nav Panel -->
+    <div class="mobile-nav-panel">
+      <a href="#categories" class="nav-link">Categories</a>
+      <a href="#spec-matrix-explorer" class="nav-link">Spec Matrix Explorer</a>
+      <a href="#recommendation-engine" class="nav-link">Daily Driver Quiz</a>
+      <a href="#manifesto" class="nav-link">Manifesto</a>
+    </div>
+  </header>
 
-            <div class="results-panel" id="resultsPanel" style="display:none;">
-                <div class="score-section">
-                    <h3>Overall Skin Score</h3>
-                    <div class="score-circle">
-                        <span id="overallScore">0</span>
-                        <span class="score-max">/5</span>
-                    </div>
-                    <div class="score-stars" id="scoreStars"></div>
-                </div>
+  <main>
+    <!-- ==================== SPLIT HERO SECTION ==================== -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <!-- Left Hero Column -->
+          <div class="hero-content">
+            <div class="eyebrow">INTERACTIVE SMARTPHONE COMPARISON PLATFORM</div>
+            <h1 class="hero-headline">Compare Smartphones.<br><em>Side by Side.</em></h1>
+            <p class="hero-subhead">
+              Select 2–3 devices to evaluate silicon benchmarks, genuine camera optics, battery endurance, and software longevity. Objective technical analysis with intelligent winner highlights—zero marketing fluff.
+            </p>
 
-                <div class="analysis-grid">
-                    <div class="analysis-card" data-type="hydration">
-                        <div class="card-icon"><i class="fas fa-droplet"></i></div>
-                        <h4>Hydration</h4>
-                        <div class="card-score"><span id="hydrationScore">0</span>/5</div>
-                        <p id="hydrationTip">Loading...</p>
-                    </div>
-
-                    <div class="analysis-card" data-type="texture">
-                        <div class="card-icon"><i class="fas fa-layer-group"></i></div>
-                        <h4>Texture</h4>
-                        <div class="card-score"><span id="textureScore">0</span>/5</div>
-                        <p id="textureTip">Loading...</p>
-                    </div>
-
-                    <div class="analysis-card" data-type="acne">
-                        <div class="card-icon"><i class="fas fa-spots"></i></div>
-                        <h4>Clearness</h4>
-                        <div class="card-score"><span id="acneScore">0</span>/5</div>
-                        <p id="acneTip">Loading...</p>
-                    </div>
-
-                    <div class="analysis-card" data-type="aging">
-                        <div class="card-icon"><i class="fas fa-clock"></i></div>
-                        <h4>Anti-Aging</h4>
-                        <div class="card-score"><span id="agingScore">0</span>/5</div>
-                        <p id="agingTip">Loading...</p>
-                    </div>
-                </div>
-
-                <div class="recommendations-section">
-                    <h3>Recommended Products</h3>
-                    <div class="products-grid" id="recommendedProducts"></div>
-                </div>
-
-                <div class="routine-section">
-                    <h3>Your Personalized Routine</h3>
-                    <div class="routine-timeline" id="personalizedRoutine"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="products" class="products-section">
-            <div class="section-header">
-                <h2>Essential Products</h2>
-                <p>Every man needs these basics for healthy skin</p>
+            <div class="hero-actions">
+              <a href="#quick-compare-bar" class="btn btn-primary" id="hero-start-compare-cta">
+                START COMPARING
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <a href="#spec-matrix-explorer" class="btn btn-outline">
+                Explore All 25+ Phones
+              </a>
             </div>
 
-            <div class="product-categories">
-                <div class="category-card">
-                    <div class="category-icon"><i class="fas fa-shower"></i></div>
-                    <h3>Cleanser</h3>
-                    <p>The foundation of any routine. Removes dirt, oil, and impurities without stripping your skin.</p>
-                    <ul class="benefits">
-                        <li><i class="fas fa-check"></i> Unclogs pores</li>
-                        <li><i class="fas fa-check"></i> Prevents breakouts</li>
-                        <li><i class="fas fa-check"></i> Prepares skin for other products</li>
-                    </ul>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon"><i class="fas fa-sun"></i></div>
-                    <h3>Moisturizer</h3>
-                    <p>Keeps skin hydrated and protected. Even oily skin needs moisture to stay balanced.</p>
-                    <ul class="benefits">
-                        <li><i class="fas fa-check"></i> Hydrates skin</li>
-                        <li><i class="fas fa-check"></i> Strengthens skin barrier</li>
-                        <li><i class="fas fa-check"></i> Reduces fine lines</li>
-                    </ul>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon"><i class="fas fa-umbrella"></i></div>
-                    <h3>Sunscreen</h3>
-                    <p>The #1 anti-aging product. Protects against UV damage, dark spots, and skin cancer.</p>
-                    <ul class="benefits">
-                        <li><i class="fas fa-check"></i> Prevents sun damage</li>
-                        <li><i class="fas fa-check"></i> Stops premature aging</li>
-                        <li><i class="fas fa-check"></i> Reduces dark spots</li>
-                    </ul>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
-                    <h3>Serum</h3>
-                    <p>Concentrated treatment that targets specific concerns like acne, aging, or dullness.</p>
-                    <ul class="benefits">
-                        <li><i class="fas fa-check"></i> Targets specific issues</li>
-                        <li><i class="fas fa-check"></i> Deep penetration</li>
-                        <li><i class="fas fa-check"></i> Visible results faster</li>
-                    </ul>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon"><i class="fas fa-eye"></i></div>
-                    <h3>Eye Cream</h3>
-                    <p>The eye area shows aging first. Special cream for dark circles, puffiness, and crow's feet.</p>
-                    <ul class="benefits">
-                        <li><i class="fas fa-check"></i> Reduces dark circles</li>
-                        <li><i class="fas fa-check"></i> Minimizes puffiness</li>
-                        <li><i class="fas fa-check"></i> Smooths fine lines</li>
-                    </ul>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon"><i class="fas fa-mask"></i></div>
-                    <h3>Exfoliator</h3>
-                    <p>Removes dead skin cells 2-3 times per week for brighter, smoother skin.</p>
-                    <ul class="benefits">
-                        <li><i class="fas fa-check"></i> Brightens complexion</li>
-                        <li><i class="fas fa-check"></i> Prevents ingrown hairs</li>
-                        <li><i class="fas fa-check"></i> Better product absorption</li>
-                    </ul>
-                </div>
+            <div class="hero-specs-strip">
+              <div class="spec-stat-item">
+                <span class="spec-stat-val">25+</span>
+                <span class="spec-stat-label">Curated Smartphones</span>
+              </div>
+              <div class="spec-stat-item">
+                <span class="spec-stat-val">8</span>
+                <span class="spec-stat-label">Flagship Brands</span>
+              </div>
+              <div class="spec-stat-item">
+                <span class="spec-stat-val">8</span>
+                <span class="spec-stat-label">Spec Dimensions</span>
+              </div>
             </div>
-        </section>
+          </div>
 
-        <section id="routines" class="routines-section">
-            <div class="section-header">
-                <h2>Daily Routines</h2>
-                <p>Simple routines for every skin type</p>
+          <!-- Right Hero Column: Interactive Benchmark Matchup Showcase -->
+          <div class="hero-editorial-card hero-matchup-card">
+            <div class="card-header-badge">
+              <span class="issue-number">FEATURED MATCHUP // DIRECT CLASH</span>
+              <span class="choice-tag">LIVE DUAL SPEC</span>
             </div>
 
-            <div class="routine-cards">
-                <div class="routine-card">
-                    <div class="routine-header">
-                        <i class="fas fa-sun"></i>
-                        <h3>Morning Routine</h3>
-                    </div>
-                    <ol class="routine-steps">
-                        <li><span class="step-num">1</span> Cleanser - Wash with lukewarm water</li>
-                        <li><span class="step-num">2</span> Toner - Balance your skin's pH</li>
-                        <li><span class="step-num">3</span> Serum - Apply targeted treatment</li>
-                        <li><span class="step-num">4</span> Moisturizer - Lock in hydration</li>
-                        <li><span class="step-num">5</span> Sunscreen - SPF 30+ (non-negotiable!)</li>
-                    </ol>
-                </div>
+            <!-- Matchup Presets Toggle -->
+            <div class="matchup-preset-pills">
+              <button class="matchup-pill-btn active" data-matchup="s24u-vs-15pm">S24 Ultra vs 15 Pro Max</button>
+              <button class="matchup-pill-btn" data-matchup="op12-vs-iqoo12">OnePlus 12 vs iQOO 12</button>
+              <button class="matchup-pill-btn" data-matchup="poco-vs-nord">POCO F6 vs Nord 4</button>
+            </div>
 
-                <div class="routine-card">
-                    <div class="routine-header">
-                        <i class="fas fa-moon"></i>
-                        <h3>Night Routine</h3>
-                    </div>
-                    <ol class="routine-steps">
-                        <li><span class="step-num">1</span> Cleanser - Remove dirt and sunscreen</li>
-                        <li><span class="step-num">2</span> Exfoliator - 2-3x per week only</li>
-                        <li><span class="step-num">3</span> Toner - Prep for treatments</li>
-                        <li><span class="step-num">4</span> Serum - Apply active ingredients</li>
-                        <li><span class="step-num">5</span> Eye Cream - Gentle pat around eyes</li>
-                        <li><span class="step-num">6</span> Night Moisturizer - Rich hydration</li>
-                    </ol>
-                </div>
+            <!-- Dual Device Visual Header -->
+            <div id="hero-matchup-stage" class="hero-matchup-stage">
+              <!-- Dynamically populated via app.js -->
             </div>
-        </section>
 
-        <section class="tips-section">
-            <div class="section-header">
-                <h2>Pro Tips</h2>
-                <p>Expert advice for better skin</p>
+            <div class="hero-card-footer">
+              <div class="hero-card-price">
+                <span class="price-label">Comparison Scope</span>
+                <span class="price-value" style="font-size: 1.15rem; font-family: var(--font-mono); font-weight: 600;">8 Verified Metrics</span>
+              </div>
+              <button id="hero-launch-matrix-btn" class="btn btn-primary btn-sm">Inspect Full Matrix →</button>
             </div>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <i class="fas fa-droplet"></i>
-                    <h4>Drink Water</h4>
-                    <p>Aim for 8 glasses daily. Hydrated skin starts from within.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-bed"></i>
-                    <h4>Get Sleep</h4>
-                    <p>7-9 hours of sleep helps skin repair and regenerate.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-utensils"></i>
-                    <h4>Eat Well</h4>
-                    <p>Antioxidant-rich foods fight free radicals and improve skin.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-hand-holding-droplet"></i>
-                    <h4>Don't Touch Face</h4>
-                    <p>Hands transfer bacteria. Keep them away from your face.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <i class="fas fa-face-smile"></i>
-                <span>SkinGlow</span>
-            </div>
-            <p>&copy; 2026 SkinGlow. Better skin starts here.</p>
+          </div>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <!-- ==================== SUBTLE INTERACTIVE COMPARISON SELECTOR ==================== -->
+        <div id="quick-compare-bar" class="quick-compare-deck">
+          <div class="deck-header">
+            <span class="deck-label">QUICK COMPARISON DECK // CHOOSE 2–3 DEVICES TO COMPARE</span>
+            <span class="deck-hint">Live spec audit with automatic category winner badges</span>
+          </div>
+
+          <div class="deck-controls-row">
+            <div class="deck-select-group">
+              <label class="deck-select-label" for="deck-phone-1">DEVICE A</label>
+              <select id="deck-phone-1" class="deck-select" aria-label="Select First Device to Compare">
+                <option value="">Select Phone 1...</option>
+              </select>
+            </div>
+
+            <div class="deck-vs-divider">VS</div>
+
+            <div class="deck-select-group">
+              <label class="deck-select-label" for="deck-phone-2">DEVICE B</label>
+              <select id="deck-phone-2" class="deck-select" aria-label="Select Second Device to Compare">
+                <option value="">Select Phone 2...</option>
+              </select>
+            </div>
+
+            <div class="deck-vs-divider">VS</div>
+
+            <div class="deck-select-group">
+              <label class="deck-select-label" for="deck-phone-3">DEVICE C (OPTIONAL)</label>
+              <select id="deck-phone-3" class="deck-select" aria-label="Select Third Device to Compare (Optional)">
+                <option value="">+ Add 3rd Phone (Optional)</option>
+              </select>
+            </div>
+
+            <button id="deck-compare-submit-btn" class="btn btn-primary deck-submit-btn">
+              Compare Now →
+            </button>
+          </div>
+
+          <div class="deck-presets-row">
+            <span class="deck-presets-label">POPULAR CLASHES:</span>
+            <button class="deck-preset-tag" data-p1="samsung-galaxy-s24-ultra" data-p2="iphone-15-pro-max">Galaxy S24 Ultra vs iPhone 15 Pro Max</button>
+            <button class="deck-preset-tag" data-p1="oneplus-12" data-p2="iqoo-12">OnePlus 12 vs iQOO 12</button>
+            <button class="deck-preset-tag" data-p1="poco-f6" data-p2="oneplus-nord-4">POCO F6 vs OnePlus Nord 4</button>
+            <button class="deck-preset-tag" data-p1="google-pixel-8a" data-p2="xiaomi-14">Pixel 8a vs Xiaomi 14</button>
+            <button class="deck-preset-tag" data-p1="realme-gt-6t" data-p2="nothing-phone-2a-plus">Realme GT 6T vs Nothing (2a)+</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CSS-ONLY INFINITE MARQUEE ==================== -->
+    <section class="marquee-container" aria-label="Key Hardware Metrics Ticker">
+      <div class="marquee-track">
+        <span class="marquee-item">AnTuTu &gt; 650k</span>
+        <span class="marquee-item">OIS Camera</span>
+        <span class="marquee-item">Flat AMOLED</span>
+        <span class="marquee-item">5000mAh+ Battery</span>
+        <span class="marquee-item">3.5mm Headphone Jack</span>
+        <span class="marquee-item">Zero Bloatware OS</span>
+        <span class="marquee-item">LTPO 1-120Hz Variable</span>
+        <span class="marquee-item">IP68 Ingress Submersion</span>
+        <span class="marquee-item">UFS 3.1+ Flash Storage</span>
+        <span class="marquee-item">Bypass Charging</span>
+      </div>
+      <!-- Cloned track for seamless infinite marquee loop -->
+      <div class="marquee-track" aria-hidden="true">
+        <span class="marquee-item">AnTuTu &gt; 650k</span>
+        <span class="marquee-item">OIS Camera</span>
+        <span class="marquee-item">Flat AMOLED</span>
+        <span class="marquee-item">5000mAh+ Battery</span>
+        <span class="marquee-item">3.5mm Headphone Jack</span>
+        <span class="marquee-item">Zero Bloatware OS</span>
+        <span class="marquee-item">LTPO 1-120Hz Variable</span>
+        <span class="marquee-item">IP68 Ingress Submersion</span>
+        <span class="marquee-item">UFS 3.1+ Flash Storage</span>
+        <span class="marquee-item">Bypass Charging</span>
+      </div>
+    </section>
+
+    <!-- ==================== CATEGORY RECOMMENDATION CARDS (CSS GRID) ==================== -->
+    <section id="categories" class="section-wrapper">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="eyebrow">Archetype Curations</span>
+            <h2 class="section-title">Recommendation Categories</h2>
+            <p class="section-description">
+              Engineered archetypes designed around distinct user priorities. Select any category to filter the full hardware spec matrix.
+            </p>
+          </div>
+        </div>
+
+        <div class="category-grid">
+          <!-- 01: Flagship Killers -->
+          <article class="category-card" data-category="flagship-killers">
+            <div class="category-card-top">
+              <div class="category-index">CATEGORY // 01</div>
+              <div class="category-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h3 class="category-name">Flagship Killers</h3>
+              <span class="category-spec-highlight">AnTuTu 1.2M+ · UFS 4.0</span>
+              <p class="category-desc">
+                Maximum computational horsepower per dollar. Top-tier Qualcomm silicon, liquid cooling vapor chambers, and blazing flash charging.
+              </p>
+            </div>
+            <div class="category-card-bottom">
+              <div class="category-lead-phone">
+                <span class="lead-label">Featured Pick</span>
+                <span class="lead-name">POCO F6 / iQOO Neo 9</span>
+              </div>
+              <span class="category-arrow-link">View →</span>
+            </div>
+          </article>
+
+          <!-- 02: Compact Performers -->
+          <article class="category-card" data-category="compact-performers">
+            <div class="category-card-top">
+              <div class="category-index">CATEGORY // 02</div>
+              <div class="category-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+              </div>
+              <h3 class="category-name">Compact Performers</h3>
+              <span class="category-spec-highlight">Sub-6.36" · Featherweight</span>
+              <p class="category-desc">
+                Ergonomic daily drivers that comfortably fit in normal pockets and allow genuine one-handed texting without compromising flagship silicon.
+              </p>
+            </div>
+            <div class="category-card-bottom">
+              <div class="category-lead-phone">
+                <span class="lead-label">Featured Pick</span>
+                <span class="lead-name">Asus Zenfone 10 / Xiaomi 14</span>
+              </div>
+              <span class="category-arrow-link">View →</span>
+            </div>
+          </article>
+
+          <!-- 03: Battery & Endurance Titans -->
+          <article class="category-card" data-category="battery-titans">
+            <div class="category-card-top">
+              <div class="category-index">CATEGORY // 03</div>
+              <div class="category-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="6" width="18" height="12" rx="2"></rect>
+                  <path d="M23 13v-2"></path>
+                  <path d="M7 10v4"></path>
+                  <path d="M11 10v4"></path>
+                </svg>
+              </div>
+              <h3 class="category-name">Battery Titans</h3>
+              <span class="category-spec-highlight">5500mAh+ · 100W Fast</span>
+              <p class="category-desc">
+                Built for relentless screen-on-time. Heavy navigation, multi-day outdoor trips, and high-wattage bypass charging to prevent degradation.
+              </p>
+            </div>
+            <div class="category-card-bottom">
+              <div class="category-lead-phone">
+                <span class="lead-label">Featured Pick</span>
+                <span class="lead-name">OnePlus Nord 4 / RealMe GT</span>
+              </div>
+              <span class="category-arrow-link">View →</span>
+            </div>
+          </article>
+
+          <!-- 04: Camera & Shutter Mavericks -->
+          <article class="category-card" data-category="camera-mavericks">
+            <div class="category-card-top">
+              <div class="category-index">CATEGORY // 04</div>
+              <div class="category-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                  <circle cx="12" cy="13" r="4"></circle>
+                </svg>
+              </div>
+              <h3 class="category-name">Camera Mavericks</h3>
+              <span class="category-spec-highlight">Hardware OIS · Large Sensors</span>
+              <p class="category-desc">
+                No gimmick 2MP sensors. Natural color science, high dynamic range sensors, and optical stabilization for crisp low-light captures.
+              </p>
+            </div>
+            <div class="category-card-bottom">
+              <div class="category-lead-phone">
+                <span class="lead-label">Featured Pick</span>
+                <span class="lead-name">Pixel 8a / Xiaomi 14 Leica</span>
+              </div>
+              <span class="category-arrow-link">View →</span>
+            </div>
+          </article>
+
+          <!-- 05: Clean Software Purists -->
+          <article class="category-card" data-category="clean-software">
+            <div class="category-card-top">
+              <div class="category-index">CATEGORY // 05</div>
+              <div class="category-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="4 17 10 11 4 5"></polyline>
+                  <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+              </div>
+              <h3 class="category-name">Clean Software Purists</h3>
+              <span class="category-spec-highlight">Zero Bloat · 5+ Yrs Updates</span>
+              <p class="category-desc">
+                Ad-free user interfaces with zero preloaded garbage apps. Predictable system performance, stock aesthetics, and long-term OS security patches.
+              </p>
+            </div>
+            <div class="category-card-bottom">
+              <div class="category-lead-phone">
+                <span class="lead-label">Featured Pick</span>
+                <span class="lead-name">Nothing Phone (2a) / Moto Neo</span>
+              </div>
+              <span class="category-arrow-link">View →</span>
+            </div>
+          </article>
+
+          <!-- 06: Headphone Jack Saviors -->
+          <article class="category-card" data-category="headphone-jack-saviors">
+            <div class="category-card-top">
+              <div class="category-index">CATEGORY // 06</div>
+              <div class="category-icon-wrapper">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                  <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+                </svg>
+              </div>
+              <h3 class="category-name">Headphone Jack Saviors</h3>
+              <span class="category-spec-highlight">3.5mm Analog Audio · MicroSD</span>
+              <p class="category-desc">
+                For audiophiles and wired audio loyalists who demand zero latency, high-resolution DACs, and physical MicroSD storage expansion.
+              </p>
+            </div>
+            <div class="category-card-bottom">
+              <div class="category-lead-phone">
+                <span class="lead-label">Featured Pick</span>
+                <span class="lead-name">Sony Xperia 10 VI / Zenfone 10</span>
+              </div>
+              <span class="category-arrow-link">View →</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== INTERACTIVE PHONE EXPLORER & SPEC MATRIX ==================== -->
+    <section id="spec-matrix-explorer" class="section-wrapper">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="eyebrow">Live Spec Filter Engine</span>
+            <h2 class="section-title">Objective Hardware Matrix</h2>
+            <p class="section-description">
+              Filter curated smartphones in real-time by uncompromised hardware traits. No sponsored rankings, strictly verified specifications.
+            </p>
+          </div>
+        </div>
+
+        <!-- Filter Controls Block -->
+        <div class="explorer-controls">
+          <div class="search-row">
+            <div class="search-input-wrapper">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="phone-search-input" class="search-input" placeholder="Search by model, brand, or processor (e.g. Snapdragon, Sony, Flat)...">
+            </div>
+            <select id="phone-sort-select" class="sort-select" aria-label="Sort Devices">
+              <option value="score-desc">Sort by: AnTuTu Score (High → Low)</option>
+              <option value="price-asc">Sort by: Price (Low → High)</option>
+              <option value="price-desc">Sort by: Price (High → Low)</option>
+              <option value="battery-desc">Sort by: Battery Capacity</option>
+            </select>
+          </div>
+
+          <div class="filter-chips-group">
+            <!-- Category Chips -->
+            <div class="filter-row">
+              <span class="filter-row-label">Category:</span>
+              <button class="chip-btn active" data-type="category" data-filter="all">All Archetypes</button>
+              <button class="chip-btn" data-type="category" data-filter="flagship-killers">Flagship Killers</button>
+              <button class="chip-btn" data-type="category" data-filter="compact-performers">Compact</button>
+              <button class="chip-btn" data-type="category" data-filter="battery-titans">Battery Titans</button>
+              <button class="chip-btn" data-type="category" data-filter="camera-mavericks">Camera Mavericks</button>
+              <button class="chip-btn" data-type="category" data-filter="clean-software">Clean Software</button>
+              <button class="chip-btn" data-type="category" data-filter="headphone-jack-saviors">3.5mm Jack</button>
+            </div>
+
+            <!-- Hardware Mandatory Specs -->
+            <div class="filter-row">
+              <span class="filter-row-label">Mandatory:</span>
+              <button class="chip-btn" data-type="spec" data-filter="flat-display">Flat Display Only</button>
+              <button class="chip-btn" data-type="spec" data-filter="ois">Hardware OIS</button>
+              <button class="chip-btn" data-type="spec" data-filter="headphone-jack">3.5mm Jack Included</button>
+              <button class="chip-btn" data-type="spec" data-filter="battery-5000">5000mAh+ Cell</button>
+              <button class="chip-btn" data-type="spec" data-filter="antutu-650k">AnTuTu &gt; 650k</button>
+              <button class="chip-btn" data-type="spec" data-filter="clean-os">Clean Stock OS</button>
+              <button class="chip-btn" data-type="spec" data-filter="compact">Compact (&lt;6.4")</button>
+            </div>
+          </div>
+
+          <div class="filter-stats-bar">
+            <span id="filter-result-count">Showing 10 of 10 curated devices</span>
+            <button id="reset-filters-btn" class="reset-filters-btn">Reset All Criteria</button>
+          </div>
+        </div>
+
+        <!-- Phone Cards Grid -->
+        <div id="phones-grid" class="phones-grid">
+          <!-- Dynamic render via app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3-STEP RECOMMENDATION QUIZ SECTION ==================== -->
+    <section id="recommendation-engine" class="quiz-section">
+      <div class="container">
+        <div class="quiz-container">
+          <div class="quiz-progress-bar">
+            <span class="step-indicator current">01 // Primary Usage</span>
+            <span class="step-indicator">02 // Non-Negotiable Spec</span>
+            <span class="step-indicator">03 // Budget Tier</span>
+          </div>
+
+          <!-- Step Container -->
+          <div class="quiz-step-container">
+            <!-- Step 1 -->
+            <div class="quiz-step-content active" data-step="1">
+              <h3 class="quiz-question">What is your primary daily workflow?</h3>
+              <p class="quiz-question-sub">Select the performance profile that matches how you use your phone 80% of the time.</p>
+
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" data-step="1" data-value="gaming">
+                  <div class="quiz-opt-title">⚡ Raw Gaming & Heavy Multitasking</div>
+                  <div class="quiz-opt-sub">Heavy sustained framerates, high-touch sampling, liquid cooling, and max AnTuTu scores.</div>
+                </div>
+                <div class="quiz-option-card" data-step="1" data-value="camera">
+                  <div class="quiz-opt-title">📷 Street Photography & Optics</div>
+                  <div class="quiz-opt-sub">Natural color science, large physical image sensors, optical image stabilization, zero shutter lag.</div>
+                </div>
+                <div class="quiz-option-card" data-step="1" data-value="battery">
+                  <div class="quiz-opt-title">🔋 Multi-Day Endurance & Commuting</div>
+                  <div class="quiz-opt-sub">5000mAh+ capacity, ultra-fast top-ups, high standby efficiency, no battery anxiety.</div>
+                </div>
+                <div class="quiz-option-card" data-step="1" data-value="productivity">
+                  <div class="quiz-opt-title">✉ Minimalist Productivity & Clean OS</div>
+                  <div class="quiz-opt-sub">Zero bloatware, zero ad notifications, clean aesthetics, ergonomic one-handed form factor.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="quiz-step-content" data-step="2">
+              <h3 class="quiz-question">What hardware compromise will you NOT make?</h3>
+              <p class="quiz-question-sub">Your absolute dealbreaker specification for everyday usability.</p>
+
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" data-step="2" data-value="flat-screen">
+                  <div class="quiz-opt-title">📏 Flat Display Only (Zero Curves)</div>
+                  <div class="quiz-opt-sub">No accidental edge palm touches, clean tempered glass protector fits, distortion-free borders.</div>
+                </div>
+                <div class="quiz-option-card" data-step="2" data-value="35mm-jack">
+                  <div class="quiz-opt-title">🎧 3.5mm Headphone Jack Required</div>
+                  <div class="quiz-opt-sub">Dedicated analog audio output for wired audiophile headphones, IEMs, and zero-latency audio.</div>
+                </div>
+                <div class="quiz-option-card" data-step="2" data-value="clean-os">
+                  <div class="quiz-opt-title">🛡 Zero Preloaded Bloatware</div>
+                  <div class="quiz-opt-sub">Stock Android / Nothing OS. No random pre-installed games or lockscreen adware.</div>
+                </div>
+                <div class="quiz-option-card" data-step="2" data-value="ois">
+                  <div class="quiz-opt-title">🎯 Hardware OIS Optical Stabilization</div>
+                  <div class="quiz-opt-sub">Hardware-stabilized lens element for clear handheld nighttime captures and steady video.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="quiz-step-content" data-step="3">
+              <h3 class="quiz-question">What is your realistic target budget?</h3>
+              <p class="quiz-question-sub">We match the optimal hardware specification curve within your bracket.</p>
+
+              <div class="quiz-options-grid">
+                <div class="quiz-option-card" data-step="3" data-value="budget">
+                  <div class="quiz-opt-title">💵 Value Tier (Under ₹30,000)</div>
+                  <div class="quiz-opt-sub">Maximum hardware utility per rupee without paying the luxury brand tax.</div>
+                </div>
+                <div class="quiz-option-card" data-step="3" data-value="midrange">
+                  <div class="quiz-opt-title">⚖ Midrange Sweet Spot (₹30,000 - ₹60,000)</div>
+                  <div class="quiz-opt-sub">Optimal balance of flagship-grade silicon, premium aluminum frames, and rapid charging.</div>
+                </div>
+                <div class="quiz-option-card" data-step="3" data-value="flagship">
+                  <div class="quiz-opt-title">💎 Flagship Tier (₹60,000+)</div>
+                  <div class="quiz-opt-sub">No compromises: IP68 submersion, wireless charging, titanium/glass, Leica/Zeiss glass.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="quiz-nav-row">
+              <button class="btn btn-outline" id="quiz-prev-btn" style="visibility: hidden;">← Back</button>
+              <button class="btn btn-primary" id="quiz-next-btn" disabled>Next Step →</button>
+            </div>
+          </div>
+
+          <!-- Results Slot -->
+          <div id="quiz-results-view" class="quiz-result-view">
+            <div id="quiz-result-slot"></div>
+            <div style="margin-top: 2rem; text-align: center;">
+              <button class="btn btn-outline btn-sm" id="restart-quiz-btn">↻ Run Match Quiz Again</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== EDITORIAL TECH MANIFESTO ==================== -->
+    <section id="manifesto" class="manifesto-section">
+      <div class="container manifesto-grid">
+        <div>
+          <div class="eyebrow" style="margin-bottom: 1.5rem;">OUR PHILOSOPHY</div>
+          <blockquote class="manifesto-quote">
+            "The modern smartphone industry is obsessed with artificial benchmarks and gimmick sensors. We believe in honest hardware."
+          </blockquote>
+        </div>
+
+        <div class="manifesto-principles">
+          <div class="principle-item">
+            <div class="principle-num">01</div>
+            <div>
+              <h4 class="principle-title">The Death of the 2MP Macro Gimmick</h4>
+              <p class="principle-body">
+                We penalize phones that pad their spec sheets with useless 2-megapixel macro and depth sensors. A single high-grade 50MP Sony or Samsung sensor with hardware OIS is worth ten cheap decorative lenses.
+              </p>
+            </div>
+          </div>
+
+          <div class="principle-item">
+            <div class="principle-num">02</div>
+            <div>
+              <h4 class="principle-title">Flat Displays Over Curved Frustration</h4>
+              <p class="principle-body">
+                Curved displays cause edge glare, accidental palm touches, and fragile drop angles. Flat AMOLED displays provide superior tactile accuracy and perfect edge-to-edge screen protector adhesion.
+              </p>
+            </div>
+          </div>
+
+          <div class="principle-item">
+            <div class="principle-num">03</div>
+            <div>
+              <h4 class="principle-title">Zero Tolerance for Notification Spam</h4>
+              <p class="principle-body">
+                A daily driver should be a calm, reliable tool—not an ad real-estate billboard. We champion operating systems with zero preloaded junkware and clean system architecture.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <span class="footer-brand-title">RE-CONE</span>
+          <p class="footer-brand-desc">
+            An independent, objective smartphone comparison platform for daily driver mobile hardware. Strict adherence to verified specs and genuine value.
+          </p>
+          <div class="eyebrow">MONOCHROME EDITION · 2025-2026</div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Curated Archetypes</div>
+          <div class="footer-links">
+            <a href="#spec-matrix-explorer" class="footer-link">Flagship Killers</a>
+            <a href="#spec-matrix-explorer" class="footer-link">Compact Performers</a>
+            <a href="#spec-matrix-explorer" class="footer-link">Battery Titans</a>
+            <a href="#spec-matrix-explorer" class="footer-link">Camera Mavericks</a>
+            <a href="#spec-matrix-explorer" class="footer-link">Clean Software</a>
+            <a href="#spec-matrix-explorer" class="footer-link">3.5mm Headphone Jack</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Spec Verification</div>
+          <div class="footer-links">
+            <a href="#manifesto" class="footer-link">Hardware Manifesto</a>
+            <a href="#recommendation-engine" class="footer-link">Match Quiz Engine</a>
+            <a href="#" class="footer-link">AnTuTu V10 Lab Scores</a>
+            <a href="#" class="footer-link">Flat Screen Index</a>
+            <a href="#" class="footer-link">OS Update Lifecycle</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Hardware Alerts</div>
+          <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 1rem;">
+            Receive our quarterly editorial issue summarizing notable phone launches with verified spec sheets.
+          </p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to RE-CONE Hardware Alerts.');">
+            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+            <button type="submit" class="btn btn-primary btn-sm">Subscribe to Issue</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <span>© 2026 RE-CONE Platform. Built with Vanilla HTML/CSS/JS.</span>
+        <span>Strict Monochromatic Aesthetic · No Shadows · No 3D</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING COMPARISON DRAWER ==================== -->
+  <div id="compare-drawer" class="compare-drawer">
+    <div class="compare-drawer-inner">
+      <div>
+        <span class="eyebrow" style="color: var(--text-inverse-muted); margin-bottom: 0.5rem;">COMPARISON TRAY (<span class="compare-count-badge">0</span>/3)</span>
+        <div id="compare-selected-list" class="compare-selected-list">
+          <!-- Dynamically populated tags -->
+        </div>
+      </div>
+      <div class="compare-actions">
+        <button id="clear-compare-btn" class="btn btn-outline btn-sm" style="color: var(--text-inverse); border-color: #444;">Clear</button>
+        <button id="open-compare-modal-btn" class="btn btn-primary btn-sm" style="background: var(--bg-primary); color: var(--text-primary);">View Spec Matrix</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SPEC DETAIL MODAL ==================== -->
+  <div id="spec-detail-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <div class="modal-content-slot">
+        <!-- Injected via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== FULL COMPARISON MATRIX MODAL ==================== -->
+  <div id="compare-modal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card" style="max-width: 1100px;">
+      <button class="modal-close-btn" aria-label="Close modal">✕</button>
+      <div class="modal-content-slot">
+        <!-- Injected via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
