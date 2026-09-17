@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinGlow - Men's Skincare AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">
+                <i class="fas fa-face-smile"></i>
+                <span>SkinGlow</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#analysis">AI Analysis</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#routines">Routines</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Smart Skincare for Men</h1>
+                <p>Get personalized skincare recommendations powered by AI. Analyze your skin, discover what you need, and achieve your best look.</p>
+                <a href="#analysis" class="cta-btn">Start AI Analysis <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+                <div class="face-graphic">
+                    <i class="fas fa-face-smile-beam"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="analysis" class="analysis-section">
+            <div class="section-header">
+                <h2>AI Face Analysis</h2>
+                <p>Upload a photo or use your camera to get instant skin analysis</p>
+            </div>
+
+            <div class="analysis-container">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content" id="uploadContent">
+                        <i class="fas fa-cloud-arrow-up"></i>
+                        <p>Drag & drop your photo here</p>
+                        <span>or</span>
+                        <button class="upload-btn" id="uploadBtn">Choose File</button>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+                    <div class="preview-area" id="previewArea" style="display:none;">
+                        <img id="previewImage" src="" alt="Preview">
+                        <button class="retake-btn" id="retakeBtn"><i class="fas fa-redo"></i> Retake</button>
+                    </div>
+                </div>
+
+                <div class="camera-area" id="cameraArea" style="display:none;">
+                    <video id="video" autoplay playsinline></video>
+                    <div class="camera-controls">
+                        <button class="capture-btn" id="captureBtn"><i class="fas fa-camera"></i></button>
+                        <button class="close-camera-btn" id="closeCameraBtn"><i class="fas fa-times"></i></button>
+                    </div>
+                    <canvas id="canvas" style="display:none;"></canvas>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="camera-btn" id="cameraBtn"><i class="fas fa-camera"></i> Use Camera</button>
+                    <button class="analyze-btn" id="analyzeBtn" disabled><i class="fas fa-wand-magic-sparkles"></i> Analyze Now</button>
+                </div>
+            </div>
+
+            <div class="results-panel" id="resultsPanel" style="display:none;">
+                <div class="score-section">
+                    <h3>Overall Skin Score</h3>
+                    <div class="score-circle">
+                        <span id="overallScore">0</span>
+                        <span class="score-max">/5</span>
+                    </div>
+                    <div class="score-stars" id="scoreStars"></div>
+                </div>
+
+                <div class="analysis-grid">
+                    <div class="analysis-card" data-type="hydration">
+                        <div class="card-icon"><i class="fas fa-droplet"></i></div>
+                        <h4>Hydration</h4>
+                        <div class="card-score"><span id="hydrationScore">0</span>/5</div>
+                        <p id="hydrationTip">Loading...</p>
+                    </div>
+
+                    <div class="analysis-card" data-type="texture">
+                        <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+                        <h4>Texture</h4>
+                        <div class="card-score"><span id="textureScore">0</span>/5</div>
+                        <p id="textureTip">Loading...</p>
+                    </div>
+
+                    <div class="analysis-card" data-type="acne">
+                        <div class="card-icon"><i class="fas fa-spots"></i></div>
+                        <h4>Clearness</h4>
+                        <div class="card-score"><span id="acneScore">0</span>/5</div>
+                        <p id="acneTip">Loading...</p>
+                    </div>
+
+                    <div class="analysis-card" data-type="aging">
+                        <div class="card-icon"><i class="fas fa-clock"></i></div>
+                        <h4>Anti-Aging</h4>
+                        <div class="card-score"><span id="agingScore">0</span>/5</div>
+                        <p id="agingTip">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="recommendations-section">
+                    <h3>Recommended Products</h3>
+                    <div class="products-grid" id="recommendedProducts"></div>
+                </div>
+
+                <div class="routine-section">
+                    <h3>Your Personalized Routine</h3>
+                    <div class="routine-timeline" id="personalizedRoutine"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="products-section">
+            <div class="section-header">
+                <h2>Essential Products</h2>
+                <p>Every man needs these basics for healthy skin</p>
+            </div>
+
+            <div class="product-categories">
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-shower"></i></div>
+                    <h3>Cleanser</h3>
+                    <p>The foundation of any routine. Removes dirt, oil, and impurities without stripping your skin.</p>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Unclogs pores</li>
+                        <li><i class="fas fa-check"></i> Prevents breakouts</li>
+                        <li><i class="fas fa-check"></i> Prepares skin for other products</li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-sun"></i></div>
+                    <h3>Moisturizer</h3>
+                    <p>Keeps skin hydrated and protected. Even oily skin needs moisture to stay balanced.</p>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Hydrates skin</li>
+                        <li><i class="fas fa-check"></i> Strengthens skin barrier</li>
+                        <li><i class="fas fa-check"></i> Reduces fine lines</li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-umbrella"></i></div>
+                    <h3>Sunscreen</h3>
+                    <p>The #1 anti-aging product. Protects against UV damage, dark spots, and skin cancer.</p>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Prevents sun damage</li>
+                        <li><i class="fas fa-check"></i> Stops premature aging</li>
+                        <li><i class="fas fa-check"></i> Reduces dark spots</li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                    <h3>Serum</h3>
+                    <p>Concentrated treatment that targets specific concerns like acne, aging, or dullness.</p>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Targets specific issues</li>
+                        <li><i class="fas fa-check"></i> Deep penetration</li>
+                        <li><i class="fas fa-check"></i> Visible results faster</li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Eye Cream</h3>
+                    <p>The eye area shows aging first. Special cream for dark circles, puffiness, and crow's feet.</p>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Reduces dark circles</li>
+                        <li><i class="fas fa-check"></i> Minimizes puffiness</li>
+                        <li><i class="fas fa-check"></i> Smooths fine lines</li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-mask"></i></div>
+                    <h3>Exfoliator</h3>
+                    <p>Removes dead skin cells 2-3 times per week for brighter, smoother skin.</p>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Brightens complexion</li>
+                        <li><i class="fas fa-check"></i> Prevents ingrown hairs</li>
+                        <li><i class="fas fa-check"></i> Better product absorption</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="routines" class="routines-section">
+            <div class="section-header">
+                <h2>Daily Routines</h2>
+                <p>Simple routines for every skin type</p>
+            </div>
+
+            <div class="routine-cards">
+                <div class="routine-card">
+                    <div class="routine-header">
+                        <i class="fas fa-sun"></i>
+                        <h3>Morning Routine</h3>
+                    </div>
+                    <ol class="routine-steps">
+                        <li><span class="step-num">1</span> Cleanser - Wash with lukewarm water</li>
+                        <li><span class="step-num">2</span> Toner - Balance your skin's pH</li>
+                        <li><span class="step-num">3</span> Serum - Apply targeted treatment</li>
+                        <li><span class="step-num">4</span> Moisturizer - Lock in hydration</li>
+                        <li><span class="step-num">5</span> Sunscreen - SPF 30+ (non-negotiable!)</li>
+                    </ol>
+                </div>
+
+                <div class="routine-card">
+                    <div class="routine-header">
+                        <i class="fas fa-moon"></i>
+                        <h3>Night Routine</h3>
+                    </div>
+                    <ol class="routine-steps">
+                        <li><span class="step-num">1</span> Cleanser - Remove dirt and sunscreen</li>
+                        <li><span class="step-num">2</span> Exfoliator - 2-3x per week only</li>
+                        <li><span class="step-num">3</span> Toner - Prep for treatments</li>
+                        <li><span class="step-num">4</span> Serum - Apply active ingredients</li>
+                        <li><span class="step-num">5</span> Eye Cream - Gentle pat around eyes</li>
+                        <li><span class="step-num">6</span> Night Moisturizer - Rich hydration</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section class="tips-section">
+            <div class="section-header">
+                <h2>Pro Tips</h2>
+                <p>Expert advice for better skin</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-droplet"></i>
+                    <h4>Drink Water</h4>
+                    <p>Aim for 8 glasses daily. Hydrated skin starts from within.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-bed"></i>
+                    <h4>Get Sleep</h4>
+                    <p>7-9 hours of sleep helps skin repair and regenerate.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-utensils"></i>
+                    <h4>Eat Well</h4>
+                    <p>Antioxidant-rich foods fight free radicals and improve skin.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-hand-holding-droplet"></i>
+                    <h4>Don't Touch Face</h4>
+                    <p>Hands transfer bacteria. Keep them away from your face.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-face-smile"></i>
+                <span>SkinGlow</span>
+            </div>
+            <p>&copy; 2026 SkinGlow. Better skin starts here.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
